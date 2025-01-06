@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-    bucket = "nareshs3bucketmulticloud"
+    bucket = "multiclouds3terraform"
   
 }
 
