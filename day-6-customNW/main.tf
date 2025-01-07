@@ -6,31 +6,18 @@ resource "aws_vpc" "dev" {
       Name = "test_server"
     }
   
-}
-
-# Create VPC
-
-resource "aws_vpc" "gcp" {
-    cidr_block = "10.0.0.0/24"
-    tags = {
-      Name = "test_server"
-    }
-  
-}
-
-
-
-# Create subnets
+}# Create subnets
 
 resource "aws_subnet" "public" {
     vpc_id = aws_vpc.dev.id
-    cidr_block = "10.0.0.0/16"
+    cidr_block = "10.0.0.0/24"
     tags = {
       Name = "public_subnet"
       
     }
 
 }
+
 # Create Internate Gateway and attach to VPC
 
 resource "aws_internet_gateway" "dev" {
@@ -83,7 +70,6 @@ resource "aws_security_group" "allow_tls" {
   }
 }
 
-
 # Create Servers
 
 resource "aws_instance" "dev" {
@@ -92,6 +78,7 @@ resource "aws_instance" "dev" {
     key_name = "aws_key"
     subnet_id = aws_subnet.public.id
      vpc_security_group_ids = [aws_security_group.allow_tls.id]
+     associate_public_ip_address = true
     tags = {
       Name = "dev-ec2"
     }
