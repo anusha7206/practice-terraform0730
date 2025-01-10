@@ -38,3 +38,8 @@ variable "key_name" {
   type        = string
   default = ""
 }
+# variable "tag" {
+#   description = "tag to associate with the instance"
+#   type        = string
+#   default = ""
+# }
